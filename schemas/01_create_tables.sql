@@ -38,17 +38,8 @@ CREATE TABLE Livre (
 CREATE TABLE Role (
     id_role SERIAL PRIMARY KEY,
     nom VARCHAR(100) NOT NULL
-);
--- Création de la table Utilisateur
-CREATE TABLE Utilisateur (
-    id_utilisateur SERIAL PRIMARY KEY,
-    nom VARCHAR(100) NOT NULL,
-    prenom VARCHAR(100) NOT NULL,
-    mail VARCHAR(255),
-    num_tel VARCHAR(15),
-    mot_de_passe VARCHAR(255),
-    id_role INT REFERENCES Role(id_role)
-);
+); 
+ 
 
 -- Création de la table Membre
 CREATE TABLE Membre (
@@ -67,7 +58,7 @@ CREATE TABLE Emprunt (
     date_retour_prevu DATE,
     date_retour DATE,
     amende DECIMAL(8, 2),
-    PRIMARY KEY (num_ISBN, id_membre)
+    PRIMARY KEY (num_ISBN, id_membre,date_emprunt)
 );
 
 -- Création de la table Creation
@@ -89,6 +80,8 @@ CREATE TABLE IF NOT EXISTS public."user"
     password character varying(255) COLLATE pg_catalog."default" NOT NULL,
     nom character varying(255) COLLATE pg_catalog."default" NOT NULL,
     prenom character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    
+    num_tel VARCHAR(15)  COLLATE pg_catalog."default" NULL,
     CONSTRAINT user_pkey PRIMARY KEY (id)
 );
  

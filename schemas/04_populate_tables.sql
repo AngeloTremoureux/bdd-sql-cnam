@@ -44,9 +44,9 @@ INSERT INTO Role (nom) VALUES
 ('Utilisateur');
 
 -- Utilisateur
-INSERT INTO Utilisateur (nom, prenom, mail, num_tel, mot_de_passe, id_role) VALUES
-('Dupont', 'Pierre', 'pierre.dupont@email.com', '0123456789', 'motdepasse123', 1),
-('Martin', 'Sophie', 'sophie.martin@email.com', '9876543210', 'mdp456', 2);
+INSERT INTO "user" (nom, prenom, mail, num_tel, password, role) VALUES
+('Dupont', 'Pierre', 'pierre.dupont@email.com', '0123456789', 'motdepasse123', "[ROLE_USER]"),
+('Martin', 'Sophie', 'sophie.martin@email.com', '9876543210', 'mdp456', "[ROLE_ADMIN]");
 
 -- Membre
 INSERT INTO Membre (adresse, date_naissance, date_inscription, id_utilisateur) VALUES
