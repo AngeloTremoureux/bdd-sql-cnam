@@ -77,3 +77,29 @@ CREATE TABLE Creation (
     PRIMARY KEY (id_auteur, num_ISBN)
 );
 
+-- Table: public.user
+
+-- DROP TABLE IF EXISTS public."user";
+
+CREATE TABLE IF NOT EXISTS public."user"
+(
+    id integer NOT NULL,
+    email character varying(180) COLLATE pg_catalog."default" NOT NULL,
+    roles json NOT NULL,
+    password character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    nom character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    prenom character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT user_pkey PRIMARY KEY (id)
+);
+ 
+-- Table: public.doctrine_migration_versions
+
+-- DROP TABLE IF EXISTS public.doctrine_migration_versions;
+
+CREATE TABLE IF NOT EXISTS public.doctrine_migration_versions
+(
+    version character varying(191) COLLATE pg_catalog."default" NOT NULL,
+    executed_at timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
+    execution_time integer,
+    CONSTRAINT doctrine_migration_versions_pkey PRIMARY KEY (version)
+);

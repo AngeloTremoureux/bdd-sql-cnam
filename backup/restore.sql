@@ -5,7 +5,7 @@ DECLARE
 BEGIN
     FOR table_name IN (SELECT information_schema.tables.table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE')
     LOOP
-        EXECUTE 'DROP TABLE IF EXISTS ' || table_name || ' CASCADE';
+        EXECUTE 'DROP TABLE IF EXISTS "' || table_name || '" CASCADE';
     END LOOP;
 END $$;
 
@@ -19,7 +19,7 @@ BEGIN
         FROM information_schema.table_constraints 
         WHERE table_schema = 'public'
     LOOP 
-        EXECUTE 'ALTER TABLE ' || row_data.table_name || ' DROP CONSTRAINT IF EXISTS ' || row_data.constraint_name;
+        EXECUTE 'ALTER TABLE "' || row_data.table_name || '" DROP CONSTRAINT IF EXISTS ' || row_data.constraint_name;
     END LOOP; 
 END $$;
 
