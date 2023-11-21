@@ -23,6 +23,36 @@ CREATE TABLE Emplacement (
     rangee VARCHAR(100) NOT NULL
 );
 
+
+ 
+ -- Table: public.user
+
+-- DROP TABLE IF EXISTS public."user";
+
+DROP SEQUENCE IF EXISTS "user_id_seq";
+CREATE SEQUENCE "user_id_seq" INCREMENT BY 1 MINVALUE 1 START 1;
+CREATE TABLE IF NOT EXISTS "users"
+(
+    id SERIAL NOT NULL,
+    email character varying(180) COLLATE pg_catalog."default" NOT NULL,
+    roles json NOT NULL,
+    password character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    nom character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    prenom character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    
+    num_tel VARCHAR(15)  COLLATE pg_catalog."default" NULL,
+    CONSTRAINT user_pkey PRIMARY KEY (id)
+);
+
+-- Création de la table Membre
+CREATE TABLE Membre (
+    id_membre SERIAL PRIMARY KEY,
+    adresse TEXT,
+    date_naissance DATE,
+    date_inscription DATE DEFAULT CURRENT_DATE,
+    id_utilisateur INT REFERENCES users(id)
+);
+
 -- Création de la table Livre
 CREATE TABLE Livre (
     num_ISBN VARCHAR(13) PRIMARY KEY,
@@ -32,22 +62,6 @@ CREATE TABLE Livre (
     id_genre INT REFERENCES Genre(id_genre),
     nb_exemplaire INT,
     id_emplacement INT REFERENCES Emplacement(id_emplacement)
-);
-
--- Création de la table Role
-CREATE TABLE Role (
-    id_role SERIAL PRIMARY KEY,
-    nom VARCHAR(100) NOT NULL
-); 
- 
-
--- Création de la table Membre
-CREATE TABLE Membre (
-    id_membre SERIAL PRIMARY KEY,
-    adresse TEXT,
-    date_naissance DATE,
-    date_inscription DATE DEFAULT CURRENT_DATE,
-    id_utilisateur INT REFERENCES Utilisateur(id_utilisateur)
 );
 
 -- Création de la table Emprunt
@@ -68,22 +82,7 @@ CREATE TABLE Creation (
     PRIMARY KEY (id_auteur, num_ISBN)
 );
 
--- Table: public.user
 
--- DROP TABLE IF EXISTS public."user";
-
-CREATE TABLE IF NOT EXISTS public."user"
-(
-    id integer NOT NULL,
-    email character varying(180) COLLATE pg_catalog."default" NOT NULL,
-    roles json NOT NULL,
-    password character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    nom character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    prenom character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    
-    num_tel VARCHAR(15)  COLLATE pg_catalog."default" NULL,
-    CONSTRAINT user_pkey PRIMARY KEY (id)
-);
  
 -- Table: public.doctrine_migration_versions
 
@@ -96,3 +95,6 @@ CREATE TABLE IF NOT EXISTS public.doctrine_migration_versions
     execution_time integer,
     CONSTRAINT doctrine_migration_versions_pkey PRIMARY KEY (version)
 );
+
+
+

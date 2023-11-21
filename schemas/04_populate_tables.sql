@@ -38,15 +38,10 @@ INSERT INTO Livre (num_ISBN, titre, id_editeur, date_publication, id_genre, nb_e
 ('9780140328721', 'Matilda', 4, '1988-10-01', 3, 12, 4),
 ('9780553382563', 'The Hitchhikers Guide to the Galaxy', 5, '1979-10-12', 4, 7, 5);
 
--- Role
-INSERT INTO Role (nom) VALUES
-('Admin'),
-('Utilisateur');
-
 -- Utilisateur
-INSERT INTO "user" (nom, prenom, mail, num_tel, password, role) VALUES
-('Dupont', 'Pierre', 'pierre.dupont@email.com', '0123456789', 'motdepasse123', "[ROLE_USER]"),
-('Martin', 'Sophie', 'sophie.martin@email.com', '9876543210', 'mdp456', "[ROLE_ADMIN]");
+INSERT INTO "users" (nom, prenom, email, num_tel, password, roles) VALUES
+('Dupont', 'Pierre', 'pierre.dupont@email.com', '0123456789', 'motdepasse123', '["ROLE_USER"]'),
+('Martin', 'Sophie', 'sophie.martin@email.com', '9876543210', 'mdp456', '["ROLE_ADMIN"]');
 
 -- Membre
 INSERT INTO Membre (adresse, date_naissance, date_inscription, id_utilisateur) VALUES
